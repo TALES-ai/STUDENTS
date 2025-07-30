@@ -205,6 +205,12 @@
       margin-bottom: 8px;
       font-weight: 600;
     }
+    h3 {
+      font-size: 15px;
+      color: #2c3e50;
+      margin: 10px 0 8px;
+      font-weight: 600;
+    }
     table {
       width: 100%;
       border-collapse: collapse;
@@ -343,38 +349,23 @@
       color: #e74c3c;
       font-size: 14px;
     }
-    .progress-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .profile-info ul {
+      list-style: none;
       margin: 10px 0;
+      padding-left: 20px;
     }
-    .progress-ring {
-      position: relative;
-      width: 100px;
-      height: 100px;
+    .profile-info li {
+      margin: 6px 0;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
-    .progress-ring circle {
-      fill: none;
-      stroke: #dfe6e9;
-      stroke-width: 8;
-    }
-    .progress-ring .progress {
-      fill: none;
-      stroke: #3498db;
-      stroke-width: 8;
-      stroke-linecap: round;
-      transform: rotate(-90deg);
-      transform-origin: 50% 50%;
-      transition: stroke-dashoffset 0.5s ease;
-    }
-    .progress-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 14px;
-      font-weight: 600;
+    .profile-info blockquote {
+      border-left: 3px solid #f39c12;
+      padding-left: 10px;
+      margin: 10px 0;
+      font-style: italic;
       color: #2c3e50;
     }
     .term-select, .score-type-select {
@@ -410,6 +401,55 @@
     .announcements-nav button:hover {
       background: #2980b9;
     }
+    .calendar-section {
+      background: #ffffff;
+      padding: 12px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-bottom: 12px;
+      width: 100%;
+    }
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .calendar-month {
+      background: #f9f9f9;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .calendar-month:hover {
+      transform: translateY(-5px);
+    }
+    .calendar-month h3 {
+      font-size: 16px;
+      color: #2c3e50;
+      margin-bottom: 8px;
+      text-align: center;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 5px;
+    }
+    .calendar-month ul {
+      list-style: none;
+      font-size: 13px;
+    }
+    .calendar-month li {
+      margin: 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .calendar-month li i {
+      font-size: 14px;
+    }
+    .term-event { color: #3498db; }
+    .holiday-event { color: #1abc9c; }
+    .exam-event { color: #e74c3c; }
+    .cocurricular-event { color: #f39c12; }
     footer {
       background: #2c3e50;
       color: #ffffff;
@@ -494,6 +534,9 @@
         padding: 10px;
         margin-bottom: 10px;
       }
+      .calendar-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -510,6 +553,7 @@
         <a href="#" onclick="showSection('announcements', hideMenu())">Announcements</a>
         <a href="#" onclick="showSection('timetables', hideMenu())">Timetables</a>
         <a href="#" onclick="showSection('resources', hideMenu())">Resources</a>
+        <a href="#" onclick="showSection('calendar', hideMenu())">Calendar</a>
         <button onclick="logout()">Logout</button>
       </div>
     </div>
@@ -534,18 +578,42 @@
           <p><i class="fas fa-users"></i> Parent Name: <strong id="parentName">Parent Details</strong></p>
           <p><i class="fas fa-phone"></i> Parent Phone: <strong id="parentPhone">Contact Pending</strong></p>
           <p><i class="fas fa-envelope"></i> Email: <strong id="email">email@example.com</strong></p>
-          <div class="progress-container">
-            <svg class="progress-ring" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="45" />
-              <circle class="progress" cx="50" cy="50" r="45" stroke-dasharray="282.6" stroke-dashoffset="282.6" id="progressRing" />
-              <text class="progress-text" id="progressText">0%</text>
-            </svg>
+          <div>
+            <h2>AI is Changing Lives</h2>
+            <p><i class="fas fa-robot"></i> Imagine a student in a rural Kenyan village using a tablet powered by AI to learn mathematics through interactive lessons tailored to their pace. In Nairobi, AI tools help doctors diagnose diseases faster, saving lives. Farmers in Kisumu use AI apps to predict weather and boost crop yields. Artificial Intelligence is transforming Kenya by making education accessible, healthcare efficient, and agriculture smarter. As a student, you can use AI to explore new subjects, get study tips, or even code your own apps. The future is bright, and AI is opening doors to endless possibilities for you!</p>
           </div>
           <div>
-            <h2>Personal Goals</h2>
-            <p>Set your academic and career goals here. Contact your mentor for guidance.</p>
-            <textarea id="goals" rows="4" placeholder="Enter your goals..." style="width: 100%;"></textarea>
-            <button onclick="saveGoals()">Save Goals</button>
+            <h2>Employment Ideas for Your Future</h2>
+            <ul>
+              <li><i class="fas fa-laptop-code"></i> <strong>Technology</strong>: Learn coding to become a software developer, creating apps or websites for businesses in Kenya’s growing tech scene.</li>
+              <li><i class="fas fa-solar-panel"></i> <strong>Renewable Energy</strong>: Study science to work in solar or wind energy, powering homes and schools sustainably.</li>
+              <li><i class="fas fa-paint-brush"></i> <strong>Creative Arts</strong>: Explore music, art, or drama to join Kenya’s vibrant creative industry, from film to cultural festivals.</li>
+              <li><i class="fas fa-tractor"></i> <strong>Agribusiness</strong>: Combine agriculture with entrepreneurship to start a modern farm or supply chain business.</li>
+            </ul>
+            <p>Talk to your teachers or career counselor to explore these paths and start preparing today!</p>
+          </div>
+          <div>
+            <h2>Choosing the Best Subject Combinations</h2>
+            <p><i class="fas fa-book-open"></i> Under the Competency-Based Curriculum (CBC), choosing subjects is about aligning your interests with your career goals. Here’s how to make smart choices:</p>
+            <ul>
+              <li><i class="fas fa-check-circle"></i> <strong>Core Subjects</strong>: Master Mathematics, English, and Kiswahili, as they build critical skills for all careers.</li>
+              <li><i class="fas fa-brain"></i> <strong>Explore Interests</strong>: Try electives like Creative Arts, Home Science, or Agriculture to discover what excites you.</li>
+              <li><i class="fas fa-balance-scale"></i> <strong>Balance Choices</strong>: Combine sciences (e.g., Integrated Science) with humanities (e.g., Social Studies) for versatility.</li>
+              <li><i class="fas fa-users"></i> <strong>Seek Guidance</strong>: Discuss with teachers and parents to match subjects with future goals, like engineering or teaching.</li>
+            </ul>
+            <p>Choose subjects you enjoy but also challenge you to grow. Visit the school counselor for personalized advice.</p>
+          </div>
+          <div>
+            <h2>Hard Work and Motivation</h2>
+            <p><i class="fas fa-rocket"></i> Success comes from dedication and a positive mindset. Here are tips to stay motivated:</p>
+            <ul>
+              <li><i class="fas fa-clock"></i> <strong>Manage Time</strong>: Create a study timetable to balance schoolwork, rest, and play.</li>
+              <li><i class="fas fa-star"></i> <strong>Set Goals</strong>: Aim for small, achievable targets, like improving your math score by 10%.</li>
+              <li><i class="fas fa-heart"></i> <strong>Stay Positive</strong>: Celebrate small wins and learn from mistakes without giving up.</li>
+              <li><i class="fas fa-users-cog"></i> <strong>Seek Support</strong>: Study with friends or ask teachers for help when stuck.</li>
+            </ul>
+            <blockquote>“The future belongs to those who believe in the beauty of their dreams.” – Eleanor Roosevelt</blockquote>
+            <p>Keep pushing forward, and your hard work will pay off!</p>
           </div>
         </div>
         <div class="fees-overview">
@@ -666,6 +734,102 @@
           <h2>Library Access</h2>
           <p>Access digital library resources and book physical copies.</p>
           <button onclick="window.open('https://library.macsschoolsea.ac.ke', '_blank')"><i class="fas fa-book"></i> Visit Library</button>
+        </div>
+      </div>
+      <div id="calendar" class="section">
+        <h1>2025 School Calendar</h1>
+        <div class="calendar-grid">
+          <div class="calendar-month">
+            <h3>January</h3>
+            <ul>
+              <li class="term-event"><i class="fas fa-school"></i> Term 1 in Progress (Jan 6 - Apr 4)</li>
+            </ul>
+          </div>
+          <div class="calendar-month">
+            <h3>February</h3>
+            <ul>
+              <li class="term-event"><i class="fas fa-school"></i> Term 1 in Progress</li>
+              <li class="holiday-event"><i class="fas fa-calendar-alt"></i> Half-Term Break (Feb 26 - Mar 2)</li>
+            </ul>
+          </div>
+          <div class="calendar-month">
+            <h3>March</h3>
+            <ul>
+              <li class="term-event"><i class="fas fa-school"></i> Term 1 in Progress</li>
+              <li class="cocurricular-event"><i class="fas fa-flask"></i> Science Fair (Mar 10 - Mar 14)</li>
+            </ul>
+          </div>
+          <div class="calendar-month">
+            <h3>April</h3>
+            <ul>
+              <li class="holiday-event"><i class="fas fa-calendar-alt"></i> April Holiday (Apr 7 - Apr 25)</li>
+              <li class="cocurricular-event"><i class="fas fa-running"></i> Athletics & Cross Country (Apr 7 - Apr 11)</li>
+              <li class="term-event"><i class="fas fa-school"></i> Term 2 Starts (Apr 28)</li>
+            </ul>
+          </div>
+          <div class="calendar-month">
+            <h3>May</h3>
+            <ul>
+              <li class="term-event"><i class="fas fa-school"></i> Term 2 in Progress</li>
+              <li class="holiday-event"><i class="fas fa-calendar-alt"></i> Labour Day (May 1)</li>
+            </ul>
+          </div>
+          <div class="calendar-month">
+            <h3>June</h3>
+            <ul>
+              <li class="term-event"><i class="fas fa-school"></i> Term 2 in Progress</li>
+              <li class="holiday-event"><i class="fas fa-calendar-alt"></i> Madaraka Day (Jun 1)</li>
+              <li class="cocurricular-event"><i class="fas fa-briefcase"></i> Career Day (Jun 16 - Jun 20)</li>
+              <li class="holiday-event"><i class="fas fa-calendar-alt"></i> Half-Term Break (Jun 25 - Jun 29)</li>
+            </ul>
+          </div>
+          <div class="calendar-month">
+            <h3>July</h3>
+            <ul>
+              <li class="term-event"><i class="fas fa-school"></i> Term 2 in Progress</li>
+              <li class="cocurricular-event"><i class="fas fa-trophy"></i> Sports: Soccer, Volleyball, Netball (Jul 26 - Aug 3)</li>
+            </ul>
+          </div>
+          <div class="calendar-month">
+            <h3>August</h3>
+            <ul>
+              <li class="term-event"><i class="fas fa-school"></i> Term 2 Ends (Aug 1)</li>
+              <li class="holiday-event"><i class="fas fa-calendar-alt"></i> August Holiday (Aug 4 - Aug 22)</li>
+              <li class="cocurricular-event"><i class="fas fa-music"></i> Kenya Music Festival (Aug 4 - Aug 12)</li>
+              <li class="cocurricular-event"><i class="fas fa-trophy"></i> FEASSSA Games (Aug 14 - Aug 25)</li>
+              <li class="term-event"><i class="fas fa-school"></i> Term 3 Starts (Aug 25)</li>
+            </ul>
+          </div>
+          <div class="calendar-month">
+            <h3>September</h3>
+            <ul>
+              <li class="term-event"><i class="fas fa-school"></i> Term 3 in Progress</li>
+              <li class="cocurricular-event"><i class="fas fa-hands-helping"></i> Community Service Week (Sep 15 - Sep 19)</li>
+            </ul>
+          </div>
+          <div class="calendar-month">
+            <h3>October</h3>
+            <ul>
+              <li class="term-event"><i class="fas fa-school"></i> Term 3 in Progress</li>
+              <li class="holiday-event"><i class="fas fa-calendar-alt"></i> Mashujaa Day (Oct 20)</li>
+              <li class="exam-event"><i class="fas fa-book"></i> Exam Preparation Week (Oct 20 - Oct 24)</li>
+              <li class="exam-event"><i class="fas fa-book"></i> KPSEA & KILEA Exams (Oct 27 - Oct 31)</li>
+              <li class="holiday-event"><i class="fas fa-calendar-alt"></i> December Holiday Starts (Oct 27)</li>
+            </ul>
+          </div>
+          <div class="calendar-month">
+            <h3>November</h3>
+            <ul>
+              <li class="exam-event"><i class="fas fa-book"></i> KJSEA & KPLEA Exams (Nov 1 - Nov 6)</li>
+              <li class="holiday-event"><i class="fas fa-calendar-alt"></i> December Holiday</li>
+            </ul>
+          </div>
+          <div class="calendar-month">
+            <h3>December</h3>
+            <ul>
+              <li class="holiday-event"><i class="fas fa-calendar-alt"></i> December Holiday (Until Jan 2, 2026)</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -810,7 +974,6 @@
       const studentRef = db.ref("users/students/" + regNoNormalized);
       const logoUrl = "https://cdn-icons-png.flaticon.com/512/2231/2231441.png";
 
-      // Add logo
       try {
         const img = new Image();
         img.crossOrigin = "Anonymous";
@@ -853,7 +1016,7 @@
         const snapshot = await studentRef.once("value");
         if (snapshot.exists()) {
           const data = snapshot.val();
-          const termKey = document.getElementById("termSelect").value; // Use selected term
+          const termKey = document.getElementById("termSelect").value;
           const termData = data.marks?.[termKey] || data.academics?.[termKey] || {};
           const scores = type === "cat" ? termData.cat || {} : termData.exam || {};
           for (const [subject, score] of Object.entries(scores)) {
@@ -914,7 +1077,6 @@
       const studentRef = db.ref("users/students/" + regNoNormalized);
       const logoUrl = "https://cdn-icons-png.flaticon.com/512/2231/2231441.png";
 
-      // Add logo
       try {
         const img = new Image();
         img.crossOrigin = "Anonymous";
@@ -955,7 +1117,7 @@
         const snapshot = await studentRef.once("value");
         if (snapshot.exists()) {
           const data = snapshot.val();
-          const termKey = document.getElementById("termSelect").value; // Use selected term
+          const termKey = document.getElementById("termSelect").value;
           const termData = data.marks?.[termKey] || data.academics?.[termKey] || {};
           let catTotal = 0, examTotal = 0;
           let catCount = 0, examCount = 0;
@@ -1063,7 +1225,6 @@
       const transactionsBody = document.getElementById("transactionsBody");
       const logoUrl = "https://cdn-icons-png.flaticon.com/512/2231/2231441.png";
 
-      // Add logo
       try {
         const img = new Image();
         img.crossOrigin = "Anonymous";
@@ -1139,22 +1300,53 @@
       slideTexts[currentSlide].classList.add('active');
     }
 
-    function saveGoals() {
-      const goals = document.getElementById("goals").value;
+    function showAnnouncements(type) {
+      const container = document.getElementById("announcementsContainer");
+      const generalBtn = document.getElementById("generalBtn");
+      const individualBtn = document.getElementById("individualBtn");
+      generalBtn.classList.toggle("active", type === "general");
+      individualBtn.classList.toggle("active", type === "individual");
+      container.innerHTML = "";
       const regNo = localStorage.getItem("regNo").replace(/\//g, "_");
-      if (goals) {
-        db.ref(`users/students/${regNo}/goals`).set(goals)
-          .then(() => showError("Goals saved successfully!", true))
-          .catch(error => showError("Failed to save goals: " + error.message));
-      } else {
-        showError("Please enter your goals.");
-      }
+      const announcementsRef = db.ref("announcements/" + (type === "general" ? "general" : regNo));
+      announcementsRef.once("value", snapshot => {
+        const announcements = snapshot.val() || {};
+        let hasAnnouncements = false;
+        for (const [id, announcement] of Object.entries(announcements)) {
+          hasAnnouncements = true;
+          const isUnread = !announcement.read;
+          container.innerHTML += `
+            <div class="announcement ${isUnread ? 'unread' : ''}" id="announcement-${id}">
+              <h4>${announcement.title || "No Title"}</h4>
+              <p><strong>Date:</strong> ${announcement.date || "Date TBD"}</p>
+              <p>${announcement.message || "No message content"}</p>
+              ${isUnread ? `<button class="mark-read" onclick="markAsRead('${id}', '${type}')">Mark as Read</button>` : ""}
+            </div>`;
+        }
+        if (!hasAnnouncements) {
+          container.innerHTML = "<p>No announcements available.</p>";
+        }
+      }).catch(error => {
+        showError("Failed to load announcements: " + error.message);
+      });
+    }
+
+    function markAsRead(id, type) {
+      const regNo = localStorage.getItem("regNo").replace(/\//g, "_");
+      const announcementRef = db.ref(`announcements/${type === "general" ? "general" : regNo}/${id}`);
+      announcementRef.update({ read: true }).then(() => {
+        const announcementDiv = document.getElementById(`announcement-${id}`);
+        announcementDiv.classList.remove("unread");
+        announcementDiv.querySelector(".mark-read")?.remove();
+        showError("Announcement marked as read!", true);
+      }).catch(error => {
+        showError("Failed to mark announcement as read: " + error.message);
+      });
     }
 
     window.onload = function() {
       const userType = localStorage.getItem("userType");
       const regNo = localStorage.getItem("regNo");
-      const studentName = localStorage.getItem("studentName");
 
       if (userType !== "student" || !regNo) {
         localStorage.clear();
@@ -1174,27 +1366,10 @@
           const profile = data.profile || {};
           document.getElementById("name").textContent = profile.name || data.name || "Student Name";
           document.getElementById("email").textContent = profile.email || "email@example.com";
-          const year = profile.year || data.form?.replace("form", "Year ") || "Year in Progress";
-          document.getElementById("year").textContent = year;
-          const progress = year === "Pre-Primary 1" ? 5 :
-                          year === "Pre-Primary 2" ? 10 :
-                          year === "Grade 1" ? 20 :
-                          year === "Grade 2" ? 30 :
-                          year === "Grade 3" ? 40 :
-                          year === "Grade 4" ? 50 :
-                          year === "Grade 5" ? 60 :
-                          year === "Grade 6" ? 70 :
-                          year === "Grade 7" ? 80 :
-                          year === "Grade 8" ? 90 :
-                          year === "Grade 9" ? 100 : 0;
-          const progressRing = document.getElementById("progressRing");
-          const progressText = document.getElementById("progressText");
-          progressText.textContent = `${progress}%`;
-          const circumference = 282.6; // 2 * π * radius (45)
-          progressRing.setAttribute("stroke-dashoffset", circumference * (1 - progress / 100));
+          document.getElementById("year").textContent = profile.year || data.form?.replace("form", "Year ") || "Year in Progress";
           document.getElementById("stream").textContent = profile.stream || data.stream || "Stream Details";
           document.getElementById("gender").textContent = profile.gender || data.gender || "To Be Updated";
-          document.getElementById("sponsor").textContent = data.fees.sponsor || "Sponsor Info";
+          document.getElementById("sponsor").textContent = data.fees?.sponsor || "Sponsor Info";
           document.getElementById("parentName").textContent = profile.parentName || data.parentName || "Parent Details";
           document.getElementById("parentPhone").textContent = profile.parentPhone || data.parentPhone || "Contact Pending";
 
@@ -1281,110 +1456,21 @@
               </tr>`;
             });
           }
-          document.getElementById("goals").value = data.goals || "";
+          if (transactionsBody.innerHTML === "") {
+            transactionsBody.innerHTML = "<tr><td colspan='6'>No transactions recorded yet</td></tr>";
+          }
+
+          showAnnouncements("general");
         } else {
           showError("Student profile not found.");
-          localStorage.clear();
-          setTimeout(() => window.location.href = "index.html", 100);
         }
-      }).catch((error) => {
+      }).catch(error => {
         loader.style.display = "none";
-        showError("Failed to load data: " + error.message);
-        localStorage.clear();
-        setTimeout(() => window.location.href = "index.html", 100);
+        showError("Failed to load profile: " + error.message);
       });
 
-      const normalizedRegNo = regNo.replace(/\//g, "_");
-      const announcementsRef = db.ref("announcements");
-      const announcementsContainer = document.getElementById("announcementsContainer");
-
-      function updateAnnouncements(type) {
-        announcementsContainer.innerHTML = "<div class='loader' style='display: inline-block; width: 30px; height: 30px;'></div> Loading announcements...";
-        const isIndividual = type === "individual";
-        const snapRef = isIndividual ? announcementsRef.child("individual").child(normalizedRegNo) : announcementsRef.child("general");
-        snapRef.once("value", (snapshot) => {
-          const announcements = [];
-          const readRef = db.ref(`users/students/${normalizedRegNo}/readAnnouncements`);
-          readRef.once("value", (readSnapshot) => {
-            const readAnnouncements = readSnapshot.val() || {};
-            snapshot.forEach(childSnapshot => {
-              const value = childSnapshot.val();
-              if (value && (value.message || value.text)) {
-                const sender = value.sender || value.teacher || value.accountant || (isIndividual ? "Unknown" : value.author);
-                const isRead = readAnnouncements[childSnapshot.key] === true;
-                announcements.push({
-                  ...value,
-                  key: childSnapshot.key,
-                  type,
-                  sender: sender || "Unknown",
-                  date: value.date || new Date().toISOString(),
-                  isRead
-                });
-              }
-            });
-            if (announcements.length === 0) {
-              announcementsContainer.innerHTML = `<p>No ${isIndividual ? "individual" : "general"} announcements available.</p>`;
-            } else {
-              Promise.all(announcements.map(ann => {
-                if (ann.sender && ann.sender !== "Unknown") {
-                  return getUserNameByEmail(ann.sender + (ann.sender.includes("@") ? "" : ".stacc@moke.ac"), ann.role === "accountant" ? "accountants" : "teachers")
-                    .then(name => ({ ...ann, sender: name }));
-                }
-                return Promise.resolve(ann);
-              })).then(updatedAnnouncements => {
-                renderAnnouncements(updatedAnnouncements);
-              });
-            }
-          });
-        }, (error) => {
-          showError("Failed to load announcements: " + error.message);
-        });
-      }
-
-      function renderAnnouncements(announcements) {
-        announcementsContainer.innerHTML = "";
-        announcements.sort((a, b) => new Date(b.date) - new Date(a.date));
-        announcements.forEach(ann => {
-          const div = document.createElement("div");
-          div.className = `announcement ${ann.isRead ? "read" : "unread"}`;
-          div.innerHTML = `
-            <h4>${ann.title || ann.text || ann.message} (${new Date(ann.date).toLocaleDateString()})</h4>
-            <p>${ann.message || ann.text}</p>
-            <p><strong>By:</strong> ${ann.sender || "Unknown"}</p>
-            ${ann.type === "individual" ? '<p><strong>To:</strong> You</p>' : ""}
-            ${ann.isRead ? '' : `<button class="mark-read" onclick="markAsRead('${ann.key}', '${ann.type}')">Mark as Read</button>`}
-          `;
-          announcementsContainer.appendChild(div);
-        });
-      }
-
-      function markAsRead(key, type) {
-        const regNo = localStorage.getItem("regNo").replace(/\//g, "_");
-        const readRef = db.ref(`users/students/${regNo}/readAnnouncements/${key}`);
-        readRef.set(true).then(() => {
-          showError("Announcement marked as read!", true);
-          updateAnnouncements(type);
-        }).catch(error => {
-          showError("Failed to mark announcement as read: " + error.message);
-        });
-      }
-
-      updateAnnouncements("general");
-      window.showAnnouncements = function(type) {
-        const generalBtn = document.getElementById("generalBtn");
-        const individualBtn = document.getElementById("individualBtn");
-        if (type === "general") {
-          generalBtn.classList.add("active");
-          individualBtn.classList.remove("active");
-        } else {
-          generalBtn.classList.remove("active");
-          individualBtn.classList.add("active");
-        }
-        updateAnnouncements(type);
-      };
-
       setInterval(slideShow, 5000);
-    };
+    }
   </script>
 </body>
 </html>
